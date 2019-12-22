@@ -1,0 +1,58 @@
+// program for tray product to retire
+
+1. check the id and expand it to DI, pre sterile components, tray components \
+2. Retire or discontinued each sub parts individual by making creating a funciton to do it for promotion
+3. Then retired the main main Tray Product/
+4. Closed the program
+
+
+//Delivered Items, Pre-sterile Components and Tray Components
+
+for step 2 collect all the di, 
+Expand bus 'Tray Product' 97000158 02 from relationship 'Validation Component' select bus id current;
+Expand bus 'Tray Product' 97000158 02 from relationship 'Delivered Item' select bus id current;
+Expand bus 'Tray Product' 97000158 02 from relationship 'Tray Offer' select bus id current;
+
+
+
+// how to compile external jpo 
+	inset program
+    insert prog 'D:\projects\MHC\git\molnlycke-healthcare\modules\core\src\main\java\com\technia\action\ExpandDIForMachine_mxJPO.java';
+	compile program
+	//compile Program ExpandDIForMachine;
+
+	execute program
+	//exec Program ExpandDIForMachine;
+	
+	
+
+
+Tray Product->Legacy, product :-Development, Design Validated,Externally Launched
+
+DI ->legacy, DI :-Development,Production Approved,Delivery Approved
+
+Pre-Sterlile component:-legacy, component
+tray component ->legacy, componnet:- Development, Design Approved, Production Approved, 
+
+legacy -Legacy In Work,Legacy Approved, Retired, Discontinued
+
+print bus 58817.39966.25517.49526 select type name current revision dump |;
+print bus 58817.39966.25517.49526 select type name current revision dump |;
+print bus 58817.39966.31258.50127 select type name current revision dump |;
+print bus 58817.39966.25895.26743 select type name current revision dump |;
+print bus 58817.39966.25189.23134 select type name current revision dump |;
+print bus 58817.39966.31409.10040 select type name current revision dump |;
+print bus 58817.39966.17527.34604 select type name current revision dump |;
+print bus 58817.39966.10661.50267 select type name current revision dump |;
+print bus 58817.39966.17527.34604 select type name current revision dump |;
+print bus 58817.39966.10661.50267 select type name current revision dump |;
+print bus 55843.31994.23806.64898 select type name current revision dump |;
+print bus 58817.39966.19892.60528 select type name current revision dump |;
+print bus 58817.39966.19892.60528 select type name current revision dump |;
+
+
+it will be product to di then di to component, and so on
+
+print bus 55843.31994.2015.630 select type name revision ;
+print bus 58817.39966.18272.3722 select type name revision ;
+print bus 50553.17916.770.13334 select type name revision ;

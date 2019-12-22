@@ -1,0 +1,667 @@
+// ocp is for those who want to create library file understand 
+
+0>  The static method can not overridden and access modifier must be same  or more accessible but return type must be same or more restricitive also known as covariant return type.
+0_1> Package-private is a more restrictive access than protected  modifier
+
+0>  Instanceof is a operator rather than a method.If a class is not subclass of it during Instanceof operator it gives the compile time error.ex :-anotherHippo instanceof Elephant; // DOES NOT COMPILE
+
+0>	The hash code is used when storing the object as a key in a map
+
+1>	All enums implicitly extend java.lang.Enum 
+2>	Since a class can extend can only one parent class therefore they can not extend another. So an Enum can implements but they cannot extends.
+3>	Static values(), Static valueOf(String), name(), ordinal(), compareTo(Enum)
+4> The Inner classes are not allowed to contain the static methods or static variables. Only nested static class are permitted to contain statics, the same way as non static method can not have static variables
+4_1> An Inner  class can extends outter class
+5> The instance of member inner class can only be created by object of outer class
+6> Method from the interface are always public as it reduce its visibiiy.
+7> A variable is not declared as final but whose value is never changed after initialization is effectively final
+						for (int i = 0; i < 10; i++) {													
+					    int counter = i;															for (int i = 0; i < 10; i++) {
+					    new Thread(() -> {															 int counter = i;	
+					        System.out.println("i = " + counter); //counter value changes, 			new Thread(() -> {
+					    }).start();								//does not compile!					 System.out.println("i = " + counter);
+					    counter++;																	}).start();
+					    	}
+					    																			}										
+											   
+											    
+											       
+											    
+
+chapter 2
+7>Is a relationship also known as inheritance,it used for reusability,
+Has a relationship is also konw as Composition or Aggregation, It is mainly made by the new keyword.
+In case of compostion whenever container oject is destoryed all contained objects will be destroyed. But in the aggregation it is not necessary that contained objects are also destoyed.
+
+
+
+8>For the singletons a> Make the constructor private ,b>Insure that object is created only once, used synchronized specifier where the object is created.c> Requires a public static method to retrieve the instance of the singleton.
+
+ For immutable strategy, a> use a construtor to set all properties of the object b> mark all the instance varibale private and final, c>Don't define any setter methods,d> Don't allow referenced mutable objects to be modified or accessed directly, e> Prevent methods from being overriden
+
+chapter 3
+1>java.lang.Comparable use natural sorting with compareTo() and java.util.Comparator uses used define sorting using compare()
+Here positive means swapping between the value
+
+2> In generic methods the formal type parameter is added before the retun type
+
+3> There are three type of bounds a> Unbounded Wildcard (?) 
+b> Wild card with upper bound (? extends type) ? extends type or type
+ex {List<? extends Exception> l =new ArrayList<RuntimeException>();}
+c> Wildcard with a lower bound (? super type)  ? superclass of String or type itself
+ex {List<? super Exception> l =new ArrayList<Object>();}
+
+
+ list.iterator().next());  // it gives the iterator element from the starting
+d> For each method 
+    java.lang.Iterable.forEach(Consumer<? super String> action)
+    forEach() is the only terminal operator that return void
+e>  Integer java.util.Map.merge(Integer key, Integer value, BiFunction<? super Integer, ? super Integer, ? extends Integer> remappingFunction)  
+f> java.util.Arrays
+g> ArrayDeque offer() add a element at back of the queue
+              push()  add an element to the front of the queue
+              poll()  retrieve or fetch and remove the first element of the Queue or the element present at the head of the Queue.
+ chapter 4
+ 
+ All the fucntional interface presnent
+
+BiConsumer.java   				  void accept(T t, U u);
+BiFunction.java				      T apply(T t, U u);
+BinaryOperator.java				  T apply(T t, T t);
+BiPredicate.java				  boolean test(T t, U u);
+
+BooleanSupplier.java			  boolean getAsBoolean();
+DoubleSupplier.java				  double getAsDouble();
+
+Consumer.java				      void accept(T t)
+Function.java					  T apply(T t)
+Predicate.java				      boolean test(T t);
+Supplier.java			          T get();
+UnaryOperator.java                T apply(int t)
+
+DoubleBinaryOperator.java		    double applyAsDouble(double left, double right);
+DoubleConsumer.java				  void accept(double value);
+DoubleFunction.java				  Double apply(Double d)
+DoublePredicate.java			  Boolean test(Double d)
+
+DoubleToIntFunction.java	      int applyAsInt(double value);
+DoubleToLongFunction.java		  long applyAsLong(double value);
+DoubleUnaryOperator.java	      double applyAsDouble(double operand);
+
+IntBinaryOperator.java				int applyAsInt(int left, int right);
+IntConsumer.java            	    void accept(int value);
+IntFunction.java					T apply(Int i)
+IntPredicate.java					Boolean test(int i)
+IntSupplier.java				    int getAsInt();
+IntToDoubleFunction.java			double applyAsDouble(int value);
+IntToLongFunction.java		  long applyAsLong(int value);
+IntUnaryOperator.java		  int applyAsInt(int operand);
+LongBinaryOperator.java		  long applyAsLong(long left, long right);
+LongConsumer.java			  void accept(long value);
+LongFunction.java			  boolean test(long value);
+LongPredicate.java			  boolean test(long value);
+LongSupplier.java			  long getAsLong();
+LongToDoubleFunction.java	  double applyAsDouble(long value);
+LongToIntFunction.java	      int applyAsInt(long value);
+LongUnaryOperator.java		  long applyAsLong(long operand);
+ObjDoubleConsumer.java		  void accept(T t, double value);
+ObjIntConsumer.java			  void accept(T t, int value);
+ObjLongConsumer.java		  void accept(T t, long value);		
+
+ToDoubleBiFunction.java	      double applyAsDouble(T t, U u);
+ToDoubleFunction.java	      double applyAsDouble(T value);
+ToIntBiFunction.java	      int applyAsInt(T t, U u);
+ToIntFunction.java		      int applyAsInt(T value);
+ToLongBiFunction.java	      long applyAsLong(T t, U u);
+ToLongFunction.java           long applyAsLong(T value);
+
+
+
+
+a> Don't confuse Double with Binary here Double means Datatype not two whereas Binary means two
+
+Stream :-
+
+	Comman terminal operations
+
+	a> allMatch()/anyMatch()/noneMatch()
+			boolean java.util.stream.Stream.allMatch(Predicate<? super Integer> predicate)
+	b> collect() 
+	        <R> R collect(Supplier<R> supplier, BiConsumer<R, ? super T> accumulator, BiConsumer<R, R> combiner)
+	c> count()       long count()
+	d> findAny()/ findFirst()
+				Optional<T> findAny()  Optional<T> findFirst()
+	e> forEach()      void forEach(Consumer<? super T> action)
+	f> min()/max()   Optional<T> min(<? super T> comparator)    Optional<T> max(<? super T> comparator)
+
+	g> reduce()   {T reduce(T identity, BinaryOperator<T> accumulator)
+                  Optional<T> reduce(BinaryOperator<T> accumulator)
+		         <U> U reduce(U identity, BiFunction<U,? super T,U> accumulator, BinaryOperator<U> combiner)}
+
+   comman intermediate operation
+   a> filter() --> Stream<T> filter(Predicate<? super T> predicate)
+   b> distinct()-> Stream<T> distinct()
+   c> limit()  -> Stream<T> limit(int maxSize)
+      skip()   -> Stream<T> skip(int n)
+   d> map()    -> <R> Stream<R> map(Function<? super T, ? extends R> mapper)
+   e> flatMap()-> <R> Stream<R> flatMap(Function<? super T, ? extends Stream<? extends R>> mapper)
+   f> sorted()  -> Stream<T> sorted()
+                  Stream<T> sorted(Comparator<? super T> comparator)
+   g> peek()    ->Stream<T> peek(Consumer<? super T> action)
+
+
+
+Optional class 
+ java.util.Optional<T>,
+ java.util.OptionalDouble,
+ java.util.OptionalLong,
+ java.util.OptionalInt
+
+Optional class are created to tackle NullPointerException
+
+Optional<T> findAny()
+Optional<T> findFirst()
+ 
+ 	opt.orElse()
+ 	opt.orElseGet()
+ 	opt.orElseThrow()
+
+ working with primitives:-
+
+
+
+chapter  5
+1>LocalDate
+  LocalTime
+  LocalDateTime
+  ZonedDateTime
+  method are : plusYear/ minusYears
+  			   plusMonths/ minusMonths
+  			   plusWeeks /minusWeeks
+  			   plusDays / minusDays
+  			   plusHours /minusHours
+  			   plusMinutes /minusMinutes
+  			   plusSeconds/ minusSeconds
+  			   plusNanos / minusNanos	
+
+1>UTC represents the time zone offset from zero
+
+2>ChronoUnit is enum have various time
+  enum ChronoUnit implements TemporalUnit {}
+
+3>class Duration implements TemporalAmount, Comparable<Duration>, Serializable {}
+ java.time.temporal.TemporalUnit is interface 
+
+4>class java.time.Period  implements ChronoPeriod, Serializable {}
+ format P1Y2M3Dv  Period.of(0,20,44)  ; Period.ofWeeks(4)
+
+5> class java.time.Instant implements Temporal, TemporalAdjuster, Comparable< Instant>, Serializable {}
+
+6>java.util.Locale   ->static Locale getDefault() {} have final class Builder {}
+						that have Builder constructor -> Locale build() {}
+
+6_1>class Properties extends Hashtable<Object,Object> {}	
+			 ->String getProperty(String key){}
+			 ->String getProperty(String key, String defaultValue) {}
+
+7>java.util.ResourceBundle ->have static final ResourceBundle getBundle(String 				baseName,Locale locale);
+7_1>abstract class java.util.ListResourceBundle extends ResourceBundle {}  -->protected Object[][] getContents() {}
+
+8>First java resource file of nearest will run then property file are run inlcuding the .class files are as it what java looks for it in background
+8> If a key is not found then it print null
+9>abstract class java.text.NumberFormat extends Format{}
+	NumberFormat en = NumberFormat.getInstance(Locale.US);
+10> final class java.time.format.DateTimeFormatter{}   -> DateTimeFormatter ofPattern("pattern") 
+	enum java.time.format.FormatStyle{}
+
+	some pattern reco
+		M 	->1
+		MM  ->01
+		MMM ->Jan
+		MMMM >January
+
+		d  ->means day of month
+		dd ->means day of month including zero for single digit day
+		,  ->for out a comma
+		y-> the year
+		yy-> two digit year
+		yyyy-> four digit year
+
+
+		hh:mm-> hours and minutes and single for single digit hours and minutes
+
+
+chapter 6
+
+	a> Unchecked exception or runtime exception
+		java.lang.ArithmeticException extends RuntimeException {}
+		java.lang.ArrayIndexOutOfBoundsException extends IndexOutOfBoundsException {} extends RuntimeException {}
+		java.lang.NegativeArraySizeException extends RuntimeException {}
+		java.lang.ArrayStoreException extends RuntimeException {}
+		java.lang.ClassCastException  extends RuntimeException {}
+		java.lang.IllegalArgumentException  extends RuntimeException {}
+		java.lang.IllegalStateException extends RuntimeException {}
+		java.lang.NullPointerException extends RuntimeException {}
+		java.lang.NumberFormatException extends IllegalArgumentException {}
+		java.lang.RuntimeException extend Exception{}
+		java.lang.UnsupportedOperationException extends RuntimeException {}
+		java.time.DateTimeException extends RuntimeException {}
+		java.util.MissingResourceException  extends RuntimeException {}
+
+	b> Checked exceptions
+		java.io.IOException extend Exception
+		java.text.ParseException extends Exception {}
+		java.io.FileNotFoundException extend IOException
+		java.io.NotSerializableException extends ObjectStreamException {}  extends IOException {}
+		java.sql.SQLException extends java.lang.Exception implements Iterable<Throwable>{}
+	
+
+	c>	Closeable restricts the type of exception thrown to IOException.
+ 	   Closeable requires implementations to be idempotent.
+ 	   If close() method declares a checked exception so try with resources must handle it
+
+	   interface java.io.Closeable extends java.lang.AutoCloseable
+
+
+
+  d>   assert boolean_expression;
+		assert boolean_expression: error_message;
+
+Assertions are often used to check method post conditions, test control flow
+invariants, and validate class invariants,An assertion should never modify any data because it may be disabled at runtime, leading to unintended side effects
+
+  		The three possible outcomes of an assert statement are as follows:
+        ■ If assertions are disabled, Java skips the assertion and goes on in the code.
+        ■ If assertions are enabled and the boolean expression is true , then our assertion has
+        been validated and nothing happens. The program continues to execute in its normal
+        manner.
+        ■ If assertions are enabled and the boolean expression is false , then our assertion is
+        invalid and a java.lang.AssertionError is thrown.
+
+  e> throw vs throws
+ 		 throws keyword is in the function signature and used to decalre as similar to try-catch block
+ 		 throws keyword is required only for checked exception and usage of throws keyword for unchecked exception is meaningless.
+           	Remember that throw means an exception is actually being thrown and throws indicate that the method merely has the potential to throw that exception.
+           	We can also undestood throws means multiple can be while throw only one can be throw example uses both:
+                 public String getDataFromDatabase() throws SQLException , IOException {
+                 throw new UnsupportedOperationException();
+                 }
+
+f>	Multicatch is effectively final
+g   class Exception extends Throwable
+	class Error extends Throwable
+	class Throwable implements Serializable
+
+chapter 7
+1>  static ExecutorService newSingleThreadExecutor(){}
+
+4>	thread.join(Int i)>> to join main thread  
+5> for converting parallel to sequential stream use stream.sequential
+6> String java.util.ArrayDeque.peek() -->  the head of the queue represented by this deque, or null if this deque is empty 
+
+7> String java.util.TreeSet.ceiling(String e) -->Returns the least element in this set greater than or equal to the given element, or null if there is no such element
+
+8.0>If an interface declares an abstract method overriding one of the public methods of java.lang.Object, that also does not count toward the interface's abstract method count since any implementation of the interface will have an implementation from java.lang.Object or elsewhere.
+
+
+8>java.lang.Comparable (compareTO(T t)){{ remember compareTo means we are comparing with someone}} for natural ordering and java.util.Comparator (compare(W w, X x)){{ it compare means we are comparing two things}} for my own sorting. 
+if by equals comparator is functional then compareTO comparable must not functional
+
+9> int java.lang.String.compareTo(String anotherString)
+Compares two strings lexicographically. The comparison is based on the Unicode value of each character in the strings. 
+
+10>In computer programming, an automatic variable is a lexically-scoped variable which is allocated and de-allocated automatically when program flow enters and leaves the variable's scope
+
+11> java will look for most specific match first it see en_US.java -> en_US.properties then en.java then en.properties
+
+12> java.time.format.DateTimeFormatter -> it have .ISO_LOCAL_DATE and pattern also
+
+
+14> IOException and other is checked exception while RuntimeException and it derivative are unchecked exception so
+FileNotFoundException is unchecked exception
+
+
+
+16_1 collection.parallelStream() is used for collection to paralle and stream.parallel() is used for stream to parallel
+16_2 calling parallel to parralle is allowed but not on parallel stream
+
+
+17> java.util.concurrent.Callable<V> can throw checked exception and return a java.util.concurrent.Future<V> while java.lang.Runnable does not and didn't have neccessary to import
+
+Future throw Eception that must be handle or delcare and can be used with Runable lambda interface.
+
+18_1>java.util.concurrent.ExecutorService  ->
+java.util.concurrent.Executors -->newSingleThreadScheduledExecutor()
+18_2>java.util.concurrent.TimeUnit; A TimeUnit represents time durations at a given unit of granularity and provides utility methods to convert across units, and to perform timing and delay operations in these units.
+
+18_3> java.util.concurrent.CopyOnWriteArrayList;
+
+19 java.util.concurrent.RecursiveAction extends ForkJoinTask<Void>{}
+  java.util.concurrent.RecursiveTask<V> extends ForkJoinTask<V> {}
+
+  void java.util.concurrent.ForkJoinTask.invokeAll(ForkJoinTask<?> t1, ForkJoinTask<?> t2)
+
+
+chapter 8 
+
+1> java.io.File commonly used methods are :-
+
+exists() 
+getName(), 
+getAbsolutePath(), 
+isDirectory(), 
+isFile(), 
+length(), 
+lastModified(), 
+delete(), 
+renameTo(File) , 
+mkdir(), 
+mkdirs() , 
+getParent(), 
+listFiles()   
+
+2> java has three built-in stream System.in System.err and System.out
+
+3>stream class are used for input ant output data in the form of binary or byte while reader or writer used in the form of character and string data. ex FileReader is a class that reads data from a file as character or strings and futhermore ObjectOutputStream writes object data to byte stream
+
+4>parent of all io classes 
+   abstract class InputStream implements Closeable{}
+   abstract class OutputStream implements Closeable, Flushable{}
+   abstract class Reader implements Readable, Closeable {}
+   abstract class Writer implements Appendable, Closeable, Flushable {}
+
+
+FileInputStream extends InputStream {}, Low
+FileOutputStream extends OutputStream {}, Low
+	Reads/Write  file data as bytes
+
+
+BufferedInputStream extends FilterInputStream {}
+BufferedOutputStream extends FilterOutputStream {}
+
+
+FileReader extends InputStreamReader{} ,  Low
+FileWriter extends OutputStreamWriter {} ,  Low
+	Reads/writes file data as characters
+
+
+BufferedReader extends Reader {} ,High
+BufferedWriter extends Writer{} ,High
+	Reads/Writes character data to an existing Reader/Writer in a
+	buffered manner, which improves efficiency and
+	performance
+
+
+ObjectInputStream extends InputStream implements ObjectInput, ObjectStreamConstants{}, High
+Deserializes primitive Java data types and graphs of Java objects from an existing InputStream
+
+ObjectOutputStream extends OutputStream implements ObjectOutput, ObjectStreamConstants {}, High
+ Serializes primitive Java data types and graphs of Java objects to an existing OutputStream
+
+
+out of 
+InputStreamReader extends Reader {},  High
+OutputStreamWriter extends Writer {},  High
+Reads/write character data from an existing InputStream/OutputStream or byte to char converter
+
+
+
+PrintWriter extends Writer {} High
+Writes formatted representations of Java objects to a text-based output stream
+
+PrintStream extends FilterOutputStream implements Appendable, Closeable, High
+Writes formatted representations of Java objects to a binary stream
+----->> print()/println()
+----->> format()/formatf()
+
+
+
+5>stream operation :-
+
+inputstream.read() for reading the file
+flush() write data to file immediately rather than put in cache
+close()
+
+mark(int)
+reset()
+
+skip(long)
+
+6>serialization of an object stores only the instance variable data, not the static class data or serializing an object throws away the static class data.
+
+Java.io.Console class methods:-
+Console has no constructor but called by System.console()
+	public PrintWriter writer()  - retrieve the unique PrintWriter object associate with console eg.console.writer().println();
+	public Reader reader() - retrieve the unique Reader object associate wih console
+	public Console format(String fmt, Object... args) - write a formatted string to the console
+	public Console printf(String format, Object... args) - write a formatted string to console using specified format string
+	public String readLine(String fmt,Object... args) - provide a formatted prompt then read a single line
+	public String readLine()  - read a single line from the console
+	public char[] readPassword(String fmt,Object... args) - provide a prompt then read a password
+	public char[] readPassword() read a password
+	public void flush() flushes the console
+
+
+
+
+
+
+chapter 9 notes
+
+CAUTION :  root of windows is drive letter while in mac and linux  is /
+ 
+  1> there is path and paths in nio2 but nio.Files{} and io.File{}
+  interface java.nio.file.Path extends Comparable<Path>, Iterable<Path>, Watchable {}
+  final class java.nio.file.Paths { }
+  final class java.nio.file.Files{}
+
+
+  2>The java.net.URI class is used to create and manage URI values.
+  ex:- Paths.get(new URI("file:///home/zoodirectory"));
+
+  3> Optional arguments in nio2 :-
+    
+       NOFOLLOW_LINKS use for Test file existing, read file data, copy file,move file
+       FOLLOW_LINKS   use for traverse a directory
+       COPY_ATTRIBUTES use for copy file
+       REPLACE_EXISTING use for copy and move file
+       ATOMIC_MOVE  use for move file
+    
+    
+ 4> Path Objects;
+     toString() return a string representaion of entire path and only mehthod to return String
+    
+     getNameCount() number of elements in the path in the int and zero-indexed, with the file system root excluded from the path
+    
+     getName() refrence to each element of the path
+                      for(int i=0; i<path.getNameCount(); i++) {
+                      System.out.println(" Element "+i+" is: "+path.getName(i));
+                      }
+                      if The Path Name is: /land/hippo/harry.happy
+                      output is Element 0 is: land
+    							Element 1 is: hippo
+    							Element 2 is: harry.happy
+    
+     getFileName(): returns a Path instance representing the filename
+      getParent() :Path instance representing the parent path or
+                    null if there is no such parent 
+     gerRoot():returns the root element for the Path object or null if the
+    Path object is relative
+    
+    isAbsolute()  toAbsolutePath()
+    root of windows is drive letter while in mac is /
+    
+    path.subpath(initial_index, final_index) 
+    
+    relativize(path) method for constructing the relative path from one path to another
+    relativize() method requires that both path values be absolute or relative
+		path3 = Paths.get("E:\\habitat");
+		path4 = Paths.get("E:\\sanctuary\\raven");
+		System.out.println(path3.relativize(path4));
+        System.out.println(path4.relativize(path3));
+   
+   it gives       ..\sanctuary\raven
+                  ..\..\habitat
+   
+   resolve() it is used to join path objects
+     eg path1 = Paths.get("/cats/../panther");
+     	 path2 = Paths.get("food");
+     	 System.out.println(path1.resolve(path2));
+    out: /cats/../panther/food 	 
+   
+   normalize(Path) method to eliminate the redundancies in the path ex:-  
+    E:\data\..\user\home  to
+    E:\user\home
+   
+   toRealPath() it check file existence and is the only path method to support NOFOLLOW_LINKS
+     ex: /..zebra/food.source  
+       /horse/food.txt
+   
+   5> Files{}  method
+   Files.exists // return boolen for file and directory existence
+      Files.isSameFile(Path,Path) :method does not compare the contents of the file. For
+      example, two files may have identical content and attributes, but if they
+      are in different locations, then this method will return false
+   
+   Files.copy(Path,Path)
+      Files.move(Path,Path) method moves or renames a file or directory within the file system
+      delete() and deleteIfExists()
+   
+   Some stream method related to the File 
+   				Stream Files.walk(Path path)
+
+   				Stream find(Path start, int maxDepth, BiPredicate<Path, BasicFileAttributes> matcher, FileVisitOption... options)
+
+   				Stream Files.list(path)
+
+   				Stream Files.lines(path) // here path links to a file rather than directory
+
+   some methods difference
+
+      java.io	directory		   java.nio directory
+      
+      file.exists()              Files.exists(path)
+      file.getName()             path.getFileName()
+      file.getAbsolutePath()     path.toAbsolutePath()
+      file.isDirectory()         Files.isDirectory(path)
+      file.isFile()              Files.isRegularFile(path)
+      file.isHidden()            Files.isHidden(path)
+      file.length()              Files.size(path)
+      file.lastModified()        Files.getLastModifiedTime(path)
+      file.setlastModified()     Files.setLastModifiedTime(path)
+      file.delete()              Files.delete(path)
+      file.renameTo(otherFile)   Files.move(path, otherPath)
+      file.mkdir()               Files.createDirectory(path)
+      file.mkdirs()              Files.createDirectories(path)
+      file.listFiles()           Files.list(path)
+
+
+
+
+chapter 10 notes
+
+1>DriverManager looks for a jar that driver META-INF/service/java.sql.Driver
+for ex postgresql file
+ postgresql-42.2.5.jar\META-INF\services\java.sql.Driver  ->org.postgresql.Driver
+ postgresql-42.2.5.jar\org\postgresql\Driver.class
+
+derby.jar\META-INF\services\java.sql.Driver ->org.apache.derby.jdbc.AutoloadedDriver
+derby.jar\org\apache\derby\jdbc\AutoloadedDriver
+
+2> Class.forName() throws ClassNotFoundException{}
+	DriverManager.getConnection() throws SQLException{}
+
+3> Key JDBC interfaces
+
+	Driver : knows how to get a connection to the database
+	Connection: how to communicate with the database
+
+	The DriverManager class provides a factory method called getConnection() to get a
+       Connection implementation
+
+		interface Connection  extends Wrapper, AutoCloseable {}
+
+	Statement : how to run the SQL
+		interface Statement extends Wrapper, AutoCloseable {}
+
+	ResultSet : What was returned by SELECT query
+		interface ResultSet extends Wrapper, AutoCloseable {}
+
+4> JDBC Url
+	ports are optional when using the default
+	A location can be localhost or an IP address or a domain name
+
+	two ways for the connection DRIVERMANAGER OR DATASOURCE,
+	we study data manager for exam
+
+
+5> Statement stmt =conn.createStatement();
+
+	Obtaining a Statement
+
+	Result Set
+	Statement stmt = conn.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+		by defalt TYPE_FORWARD but also TYPE_SCROLL_INSENSITIVE and TYPE_SCROLL_SENSITIVE 
+	If not available the driver get downgrade ie TYPE_SCROLL_SENSITIVE to TYPE_SCROLL_INSENSITIVE
+	SAME FOR THE ResultSet.CONCUR_UPDATAABLE -> ResultSet.CONCUR_Read_ONLY
+
+	Executing the statement
+		int java.sql.Statement.executeUpdate(String sql) throws SQLException
+			>> it give int for no of delete, insert , update
+		ResultSet java.sql.Statement.executeQuery(String sql) throws SQLException
+			>> it is used for giving the result set only that have data
+		boolean java.sql.Statement.execute(String sql) throws SQLException
+				return boolean to indicate whether the statement was query
+
+6> Getting the date 
+		Remember the column are counted from 1 rather than 0
+			rs.next() 
+				rs.getInt("count");
+
+    sql date 
+		java.sql.Date    ->getDate()
+		java.sql.Time    ->getTime()
+		java.sql.TimeStamp->getTimeStampe()  for both date and time
+		getObject() can return any type
+
+7> Scrolling the resultset
+		boolean rs.next()
+		boolean rs.previous()
+		boolean rs.first()   -> void rs.beforeFirst() it is before the first line ie starting of the data
+		boolean rs.last()    -> void rs.afterLast() it is after the last line
+		boolean rs.absolute() -> return the present of the index of the row   
+		    					 0 means the title and 1 below it while negative number start from the end of the result set
+		 beforeFirst() and afterLast() method used to go outside of the ResultSet.
+
+8> Dealing with the exceptions
+		SQLException.getMessage()
+		SQLException.getSQLState()
+		SQLException.getErrorCode()
+	For closing all the three resources, the ReslultSet must be closed first ,then Statement and then Connection as closing the later will automatically closes the earlier.
+
+
+	
+/// my practise
+practice 1 why
+2> we can not use non static inside static
+3> toString can not be overloaded or define in interface
+5>we can chosse d but why we interface are made , so always add interface
+6 answe must be 1 and 3
+7 exception error
+8 sysout is not written properly must be some get
+9 exception has 
+16 forEach is in both collection and stream
+20 the program will never end as no termiantion operation
+29 no method for primitive variables
+35 a exception must be thrown that may be caught by ioexception
+36 compilation fail for must use try catch but run give output true path will be same
+38 a and c are both same so d
+51 it does not work because of for refrence method it must be static
+53 it must be not optoinal as it is distinct an calculated
+54 return type must be stream
+56 b or d as a and c get not optional
+59 may be findFirst is termaial method
+
+practise 3
+7> since a reduce the method access level shile b get the new method
+

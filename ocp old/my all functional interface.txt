@@ -1,0 +1,49 @@
+BiConsumer.java   				  void accept(T t, U u);
+BiFunction.java				      T apply(T t, U u);
+BinaryOperator.java				  T apply(T t, T t);
+BiPredicate.java				  boolean test(T t, U u);
+
+BooleanSupplier.java			  boolean getAsBoolean();
+DoubleSupplier.java				  double getAsDouble();
+
+Consumer.java				      void accept(T t)
+Function.java					  T apply(T t)
+Predicate.java				      boolean test(T t);
+Supplier.java			          T get();
+UnaryOperator.java                T apply(int t)
+
+DoubleBinaryOperator.java		    double applyAsDouble(double left, double right);
+DoubleConsumer.java				  void accept(double value);
+DoubleFunction.java				  Double apply(Double d)
+DoublePredicate.java			  Boolean test(Double d)
+
+DoubleToIntFunction.java	      int applyAsInt(double value);
+DoubleToLongFunction.java		  long applyAsLong(double value);
+DoubleUnaryOperator.java	      double applyAsDouble(double operand);
+
+IntBinaryOperator.java				int applyAsInt(int left, int right);
+IntConsumer.java            	    void accept(int value);
+IntFunction.java					T apply(Int i)
+IntPredicate.java					Boolean test(int i)
+IntSupplier.java				    int getAsInt();
+IntToDoubleFunction.java			double applyAsDouble(int value);
+IntToLongFunction.java		  long applyAsLong(int value);
+IntUnaryOperator.java		  int applyAsInt(int operand);
+LongBinaryOperator.java		  long applyAsLong(long left, long right);
+LongConsumer.java			  void accept(long value);
+LongFunction.java			  boolean test(long value);
+LongPredicate.java			  boolean test(long value);
+LongSupplier.java			  long getAsLong();
+LongToDoubleFunction.java	  double applyAsDouble(long value);
+LongToIntFunction.java	      int applyAsInt(long value);
+LongUnaryOperator.java		  long applyAsLong(long operand);
+ObjDoubleConsumer.java		  void accept(T t, double value);
+ObjIntConsumer.java			  void accept(T t, int value);
+ObjLongConsumer.java		  void accept(T t, long value);		
+
+ToDoubleBiFunction.java	      double applyAsDouble(T t, U u);
+ToDoubleFunction.java	      double applyAsDouble(T value);
+ToIntBiFunction.java	      int applyAsInt(T t, U u);
+ToIntFunction.java		      int applyAsInt(T value);
+ToLongBiFunction.java	      long applyAsLong(T t, U u);
+ToLongFunction.java           long applyAsLong(T value);

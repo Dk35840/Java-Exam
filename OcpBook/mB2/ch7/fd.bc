@@ -1,0 +1,109 @@
+Compiled from "PQ38.java"
+public class mB2.ch7.PQ38 {
+  static java.lang.Integer cookies;
+
+  public mB2.ch7.PQ38();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public void deposit(int);
+    Code:
+       0: getstatic     #2                  // Field cookies:Ljava/lang/Integer;
+       3: dup
+       4: astore_2
+       5: monitorenter
+       6: getstatic     #2                  // Field cookies:Ljava/lang/Integer;
+       9: invokevirtual #3                  // Method java/lang/Integer.intValue:()I
+      12: iload_1
+      13: iadd
+      14: invokestatic  #4                  // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      17: putstatic     #2                  // Field cookies:Ljava/lang/Integer;
+      20: aload_2
+      21: monitorexit
+      22: goto          30
+      25: astore_3
+      26: aload_2
+      27: monitorexit
+      28: aload_3
+      29: athrow
+      30: return
+    Exception table:
+       from    to  target type
+           6    22    25   any
+          25    28    25   any
+
+  public void withdrawal(int);
+    Code:
+       0: getstatic     #2                  // Field cookies:Ljava/lang/Integer;
+       3: dup
+       4: astore_2
+       5: monitorenter
+       6: getstatic     #2                  // Field cookies:Ljava/lang/Integer;
+       9: invokevirtual #3                  // Method java/lang/Integer.intValue:()I
+      12: iload_1
+      13: isub
+      14: invokestatic  #4                  // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      17: putstatic     #2                  // Field cookies:Ljava/lang/Integer;
+      20: aload_2
+      21: monitorexit
+      22: goto          30
+      25: astore_3
+      26: aload_2
+      27: monitorexit
+      28: aload_3
+      29: athrow
+      30: return
+    Exception table:
+       from    to  target type
+           6    22    25   any
+          25    28    25   any
+
+  public static void main(java.lang.String[]) throws java.lang.Exception;
+    Code:
+       0: bipush        50
+       2: invokestatic  #5                  // Method java/util/concurrent/Executors.newScheduledThreadPool:(I)Ljava/util/concurrent/ScheduledExecutorService;
+       5: astore_1
+       6: new           #6                  // class mB2/ch7/PQ38
+       9: dup
+      10: invokespecial #7                  // Method "<init>":()V
+      13: astore_2
+      14: iconst_0
+      15: istore_3
+      16: iload_3
+      17: bipush        99
+      19: if_icmpge     54
+      22: aload_1
+      23: aload_2
+      24: invokedynamic #8,  0              // InvokeDynamic #0:run:(LmB2/ch7/PQ38;)Ljava/lang/Runnable;
+      29: invokeinterface #9,  2            // InterfaceMethod java/util/concurrent/ExecutorService.submit:(Ljava/lang/Runnable;)Ljava/util/concurrent/Future;
+      34: pop
+      35: aload_1
+      36: aload_2
+      37: invokedynamic #10,  0             // InvokeDynamic #1:run:(LmB2/ch7/PQ38;)Ljava/lang/Runnable;
+      42: invokeinterface #9,  2            // InterfaceMethod java/util/concurrent/ExecutorService.submit:(Ljava/lang/Runnable;)Ljava/util/concurrent/Future;
+      47: pop
+      48: iinc          3, 1
+      51: goto          16
+      54: aload_1
+      55: invokeinterface #11,  1           // InterfaceMethod java/util/concurrent/ExecutorService.shutdown:()V
+      60: aload_1
+      61: ldc2_w        #12                 // long 10l
+      64: getstatic     #14                 // Field java/util/concurrent/TimeUnit.SECONDS:Ljava/util/concurrent/TimeUnit;
+      67: invokeinterface #15,  4           // InterfaceMethod java/util/concurrent/ExecutorService.awaitTermination:(JLjava/util/concurrent/TimeUnit;)Z
+      72: pop
+      73: getstatic     #16                 // Field java/lang/System.out:Ljava/io/PrintStream;
+      76: aload_2
+      77: pop
+      78: getstatic     #2                  // Field cookies:Ljava/lang/Integer;
+      81: invokevirtual #17                 // Method java/io/PrintStream.print:(Ljava/lang/Object;)V
+      84: return
+
+  static {};
+    Code:
+       0: bipush        22
+       2: invokestatic  #4                  // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+       5: putstatic     #2                  // Field cookies:Ljava/lang/Integer;
+       8: return
+}
